@@ -1,0 +1,76 @@
+﻿@model EducationalBackground
+@{
+    ViewData["Title"] = "Delete Education";
+}
+
+<div class="container w-75 bg-white p-4">
+    <h3 class="mb-3 text-danger">ARE YOU SURE YOU WANT TO REMOVE THIS ITEM?</h3>
+    <form method="post" asp-action="DeleteEducation">
+        <div class="row g-2">
+            <div class="col-lg-12">
+                <label for="" class="form-label">Employee Id</label>
+                <input type="text" class="form-control" asp-for="EmployeeId" readonly>
+            </div>
+            <div class="col-lg-12">
+                <label for="" class="form-label">Educational Background Id</label>
+                <input type="text" class="form-control" asp-for="EducationalBackgroundId" readonly>
+            </div>
+            <div class="col-12">
+                <label for="" class="form-label">Level</label>
+                <select class="form-select" asp-for="Level" disabled>
+                    <option class="dropdown-item" value=""></option>
+                    <option value="Elementary">Elementary</option>
+                    <option value="Secondary">Secondary</option>
+                    <option value="Vocational">Vocational</option>
+                    <option value="College">College</option>
+                    <option value="Graduate Studies">Graduate Studies</option>
+                </select>
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6">
+                <label for="" class="form-label">Name of School</label>
+                <input type="text" class="form-control" asp-for="NameOfSchool" readonly>
+                <span asp-validation-for="NameOfSchool" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6">
+                <label for="" class="form-label">Course</label>
+                <input type="text" class="form-control" asp-for="Course" readonly>
+                <span asp-validation-for="Course" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4">
+                <label for="" class="form-label">From Date</label>
+                <input type="month" class="form-control" asp-for="FromDate" readonly>
+                <span asp-validation-for="FromDate" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4">
+                <label for="" class="form-label">To Date</label>
+                <input type="month" class="form-control" asp-for="ToDate" readonly>
+                <span asp-validation-for="ToDate" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4">
+                <label for="" class="form-label">Units Earned</label>
+                <input type="number" class="form-control" asp-for="UnitsEarned" readonly>
+            </div>
+            <div class="col-lg-3">
+                <label for="" class="form-label">Year Graduated</label>
+                <input type="number" class="form-control" asp-for="YearGraduated" readonly>
+            </div>
+            <div class="col-lg-9">
+                <label for="" class="form-label">Academic Honors Received</label>
+                <input type="text" class="form-control" asp-for="HonorsReceived" readonly>
+            </div>
+        </div>
+
+        <div class="mt-3 btn-group">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-controller="Employee" asp-action="View" asp-route-id="@Model.EmployeeId" class="btn btn-secondary">Back to Employee Details</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

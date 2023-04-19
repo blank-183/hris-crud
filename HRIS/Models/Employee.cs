@@ -58,9 +58,19 @@ public partial class Employee
     {
         get
         {
+            if (MiddleName != null && NameExtension != null)
+            {
+                return $"{FirstName} {MiddleName} {LastName} {NameExtension}";
+            }
+
             if (MiddleName != null)
             {
-                return FirstName + " " + MiddleName + " " + LastName;
+                return $"{FirstName} {MiddleName} {LastName}";
+            }
+
+            if (NameExtension != null)
+            {
+                return $"{FirstName} {LastName} {NameExtension}";
             }
 
             return FirstName + " " + LastName;

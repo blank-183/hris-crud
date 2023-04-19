@@ -113,7 +113,7 @@ namespace HRIS.Controllers
 
                 var govAccount = this._context.GovernmentAccounts.FirstOrDefault(g => g.EmployeeId == id);
 
-                var backgroundList = this._context.EducationalBackgrounds.Where(x => x.EmployeeId == id).ToList();
+                var backgroundList = this._context.EducationalBackgrounds.Where(x => x.EmployeeId == id).OrderByDescending(g => g.ToDate).ToList();
 
                 var employeeDetails = new EmployeeDetails()
                 {
@@ -214,7 +214,7 @@ namespace HRIS.Controllers
                     this._context.SaveChanges();
 
                     TempData["success"] = "Employee details updated successfully!";
-                    return RedirectToAction("View", "Employee", model.EmployeeId.ToString());
+                    return View(model);
                 }
                 catch (Exception ex)
                 {
@@ -283,8 +283,6 @@ namespace HRIS.Controllers
                 TempData["error"] = ex.Message.ToString();
                 return RedirectToAction("Index");
             }
-            
-
         }
 
         [HttpGet]
@@ -338,21 +336,153 @@ namespace HRIS.Controllers
                     FromDate = educBackground.FromDate,
                     ToDate = educBackground.ToDate,
                     UnitsEarned = educBackground.UnitsEarned,
-                        YearGraduated = educBackground.YearGraduated,
-                        HonorsReceived = educBackground.HonorsReceived,
-                    };
+                    YearGraduated = educBackground.YearGraduated,
+                    HonorsReceived = educBackground.HonorsReceived,
+                };
 
-                    this._context.Add(education);
-                    this._context.SaveChanges();
+                this._context.Add(education);
+                this._context.SaveChanges();
 
-                    TempData["success"] = "Educational background added successfully!";
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
+                TempData["success"] = "Educational background added successfully!";
+                return RedirectToAction("AddEducation");
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message.ToString();
+                return View(educBackground);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult UpdateEducation(int? id)
+        {
+            try
+            {
+                var education = this._context.EducationalBackgrounds.Find(id);
+
+                if (education == null)
                 {
-                    TempData["error"] = ex.Message.ToString();
-                    return View(educBackground);
+                    return NotFound();
                 }
+
+                var model = new EducationalBackground()
+                {
+                    EmployeeId = education.EmployeeId,
+                    EducationalBackgroundId = education.EducationalBackgroundId,
+                    Level = education.Level,
+                    NameOfSchool = education.NameOfSchool,
+                    Course = education.Course,
+                    FromDate = education.FromDate,
+                    ToDate = education.ToDate,
+                    UnitsEarned = education.UnitsEarned,
+                    YearGraduated = education.YearGraduated,
+                    HonorsReceived = education.HonorsReceived,
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message.ToString();
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateEducation(EducationalBackground educationPost)
+        {
+            try
+            {
+                var education = this._context.EducationalBackgrounds.Find(educationPost.EducationalBackgroundId);
+
+                if (education == null)
+                {
+                    return NotFound();
+                }
+                education.Level = educationPost.Level;
+                education.NameOfSchool = educationPost.NameOfSchool;
+                education.Course = educationPost.Course;
+                education.FromDate = educationPost.FromDate;
+                education.ToDate = educationPost.ToDate;
+                education.UnitsEarned = educationPost.UnitsEarned;
+                education.YearGraduated = educationPost.YearGraduated;
+                education.HonorsReceived = educationPost.HonorsReceived;
+
+                this._context.SaveChanges();
+
+                TempData["success"] = "Education updated successfully!";
+                return View(education);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.ToString();
+                return View(educationPost);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult DeleteEducation(int? id)
+        {
+            try
+            {
+                var education = this._context.EducationalBackgrounds.Find(id);
+
+                if (education == null)
+                {
+                    return NotFound();
+                }
+
+                var model = new EducationalBackground()
+                {
+                    EmployeeId = education.EmployeeId,
+                    EducationalBackgroundId = education.EducationalBackgroundId,
+                    Level = education.Level,
+                    NameOfSchool = education.NameOfSchool,
+                    Course = education.Course,
+                    FromDate = education.FromDate,
+                    ToDate = education.ToDate,
+                    UnitsEarned = education.UnitsEarned,
+                    YearGraduated = education.YearGraduated,
+                    HonorsReceived = education.HonorsReceived,
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message.ToString();
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        // Post
+        [HttpPost, ActionName("DeleteEducation")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteEducationPost(int? id)
+        {
+            try
+            {
+                var education = this._context.EducationalBackgrounds.Find(id);
+
+                if (education == null)
+                {
+                    return NotFound();
+
+                }
+
+                this._context.EducationalBackgrounds.Remove(education);
+                this._context.SaveChanges();
+
+                TempData["success"] = "Education deleted successfully!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message.ToString();
+                return RedirectToAction("Index");
+            }
         }
 
     }

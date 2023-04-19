@@ -23,7 +23,19 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <label for="" class="form-label">Name Extension</label>
-                <input type="text" class="form-control" asp-for="NameExtension">
+                @*<input type="text" class="form-control" asp-for="NameExtension">*@
+                <select class="form-select" asp-for="NameExtension">
+                    <option class="dropdown-item" value=""></option>
+                    <option value="Jr.">Jr.</option>
+                    <option value="Sr.">Sr.</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="V">V</option>
+                    <option value="VI">VI</option>
+                    <option value="VII">VII</option>
+                    <option value="VIII">VIII</option>
+                    <option value="X">X</option>
+                </select>
             </div>
             <div class="col-lg-3 col-md-6">
                 <label for="" class="form-label">Date Of Birth</label>
