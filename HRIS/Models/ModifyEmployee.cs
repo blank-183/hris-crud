@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace HRIS.Models
 {
-    public class UpdateEmployee
+    public class ModifyEmployee
     {
         public int EmployeeId { get; set; }
 

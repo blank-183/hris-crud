@@ -1,5 +1,9 @@
 ﻿@model EmployeeDetails
 @{
+    ViewData["Title"] = "View Employee Details";
+    bool isGovAccoutNotNull = Model.GovernmentAccount.GsisNo != null || Model.GovernmentAccount.PagibigNo != null ||
+                              Model.GovernmentAccount.PhilhealthNo != null || Model.GovernmentAccount.SssNo != null || 
+                              Model.GovernmentAccount.Tin != null;
 }
 
 <div class="container bg-white p-4">
@@ -48,8 +52,8 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.GovernmentAccount.GsisNo != null)
-                {
+                @if (isGovAccoutNotNull)
+                    {
                     <tr>
                         <td>@Model.GovernmentAccount.GsisNo</td>
                         <td>@Model.GovernmentAccount.PagibigNo</td>
