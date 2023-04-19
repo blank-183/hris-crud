@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Employee>
+@{
+}
+
+<div class="container bg-white p-4">
+    
+    <div class="row mb-2">
+        <div class="col-6">
+            <h3 class="mb-3">EMPLOYEE LIST</h3>
+            
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Employee" asp-action="Add" class="btn btn-dark">
+                Add New Employee
+            </a>
+        </div>
+    </div>
+
+
+    <input id="searchBar" type="text" onkeyup="searchName()" class="form-control mb-2" placeholder="Search employee">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="employeeTable">
+            <thead>
+                <tr class="table-active">
+                    <th>Employee ID</th>
+                    <th>Full Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Sex</th>
+                    <th>Civil Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var employee in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">@employee.EmployeeId</td>
+                            <td class="align-middle">@employee.FullName</td>
+                            <td class="align-middle">@employee.DateOfBirth.ToString("MMMM dd yyyy")</td>
+                            <td class="align-middle">@employee.Sex</td>
+                            <td class="align-middle">@employee.CivilStatus</td>
+                            <td class="align-middle">
+                                <a class="btn btn-dark" asp-controller="Employee" asp-action="View" asp-route-id="@employee.EmployeeId">
+                                    View Details
+                                </a>
+                                <a class="btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.EmployeeId">
+                                    Delete
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center align-middle">
+                            <div>
+                                Data is currently unavailable.
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+
+
+</div>
+
+<script>
+    function searchName() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchBar");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("employeeTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

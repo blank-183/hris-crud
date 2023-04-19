@@ -1,0 +1,125 @@
+﻿@model HRIS.Models.UpdateEmployee
+@{
+}
+
+<div class="container w-75 bg-white p-4">
+    <h3 class="mb-3">UPDATE EMPLOYEE</h3>
+    <form method="post" asp-action="Update">
+        <div class="row g-2">
+            <div class="mb-3">
+                <label for="" class="form-label">Employee Id</label>
+                <input type="text" class="form-control" asp-for="EmployeeId" readonly>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="" class="form-label">First Name</label>
+                <input type="text" class="form-control" asp-for="FirstName">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="" class="form-label">Middle Name</label>
+                <input type="text" class="form-control" asp-for="MiddleName">
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="" class="form-label">Last Name</label>
+                <input type="text" class="form-control" asp-for="LastName">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="" class="form-label">Name Extension</label>
+                <input type="text" class="form-control" asp-for="NameExtension">
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control" asp-for="DateOfBirth">
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="" class="form-label">Sex</label>
+                @*<input type="text" class="form-control" asp-for="Sex">*@
+                <select class="form-select" asp-for="Sex">
+                    <option class="dropdown-item" value=""></option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+                <span asp-validation-for="Sex" class="text-danger"></span>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="" class="form-label">Civil Status</label>
+                @*<input type="text" class="form-control" asp-for="CivilStatus">*@
+                <select class="form-select" asp-for="CivilStatus">
+                    <option class="dropdown-item" value=""></option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Others">Others</option>
+                </select>
+                <span asp-validation-for="Sex" class="text-danger"></span>
+                <span asp-validation-for="CivilStatus" class="text-danger"></span>
+            </div>
+            <div class="col-lg-5 col-md-6">
+                <label for="" class="form-label">Height(m)</label>
+                <input type="number" step="any" class="form-control" asp-for="Height">
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="col-lg-5 col-md-6">
+                <label for="" class="form-label">Weight(kg)</label>
+                <input type="number" step="any" class="form-control" asp-for="Weight">
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <label for="" class="form-label">Blood Type</label>
+                @*<input type="text" class="form-control" asp-for="BloodType">*@
+                <select class="form-select" asp-for="BloodType">
+                    <option class="dropdown-item" value=""></option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <span asp-validation-for="BloodType" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="" class="form-label">GSIS Number</label>
+                <input type="number" class="form-control" asp-for="Gsisno">
+                <span asp-validation-for="Gsisno" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="" class="form-label">Pag-Ibig Number</label>
+                <input type="number" class="form-control" asp-for="PagIbigNo">
+                <span asp-validation-for="PagIbigNo" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="" class="form-label">PhilHealth Number</label>
+                <input type="number" class="form-control" asp-for="PhilHealthNo">
+                <span asp-validation-for="PhilHealthNo" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <label for="" class="form-label">SSS Number</label>
+                <input type="number" class="form-control" asp-for="Sssno">
+                <span asp-validation-for="Sssno" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6">
+                <label for="" class="form-label">TIN</label>
+                <input type="number" class="form-control" asp-for="Tinno">
+                <span asp-validation-for="Tinno" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mt-3 btn-group">
+            <button type="submit" class="btn btn-dark">Update Employee</button>
+            <a asp-controller="Employee" asp-action="View" asp-route-id="@Model.EmployeeId" class="btn btn-secondary">Back to Employee Details</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
