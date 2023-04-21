@@ -343,7 +343,7 @@ namespace HRIS.Controllers
                 this._context.Add(education);
                 this._context.SaveChanges();
 
-                TempData["success"] = "Educational background added successfully!";
+                TempData["success"] = "Education added successfully!";
                 return RedirectToAction("AddEducation");
             }
             catch (Exception ex)
